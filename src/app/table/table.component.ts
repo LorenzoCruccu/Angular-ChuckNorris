@@ -1,6 +1,6 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-
+import {Component, Input, OnInit} from '@angular/core';
+import {Jokes} from '../shared/prova.service';
+import {ProvaService} from '../shared/prova.service';
 
 @Component({
   selector: 'app-table',
@@ -29,26 +29,22 @@ import {HttpClient} from '@angular/common/http';
     </div>
   `
 })
-export class TableComponent implements OnChanges{
+export class TableComponent implements OnInit{
   @Input() prendoDati: any;
   url = 'http://api.icndb.com/jokes';
   // possibile json recuperato col service
-  headers = ['joke', 'categoria'];
+  headers = ['id', 'categoria'];
 
-   jokes: any = [];
-  constructor(private http: HttpClient) {
+ jokes: any;
 
-  }
+ constructor(private provaService: ProvaService) {
+ }
 
-  getData(){
-    const url = 'http://api.icndb.com/jokes';
-    this.http.get(url).subscribe((res) => {
-      this.jokes = res;
-      console.log(this.jokes);
+  ngOnInit(){
+    this.provaService.getJokes().subscribe(data => {
+      this.jokes = data;
+      console.log(data);
     });
-  }
-  ngOnChanges() {
-    this.getData();
   }
 
 }

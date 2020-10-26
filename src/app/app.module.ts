@@ -6,7 +6,7 @@ import {FilterComponent} from './filter/filter.component';
 import {TableComponent} from './table/table.component';
 import {FormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import {ProvaService} from './shared/prova.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ProvaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
