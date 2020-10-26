@@ -6,10 +6,10 @@ import {Component} from '@angular/core';
     <div>
      <h1> Component Filter</h1>
       <br>
-      <input type="checkbox" id="nerdy" (change)="aggiornaNerdy($event)">
+      <input type="checkbox" id="nerdy" [(ngModel)]="dati.nerdy" >
       <label for="nerdy"> Nerdy</label>
 
-      <input type="checkbox" id="explicit" (change)="aggiornaExplicit($event)">
+      <input type="checkbox" id="explicit" [value]="dati.explicit"  (change)="aggiornaExplicit($event)" >
       <label for="explicit"> Explicit</label>
       <br>
 

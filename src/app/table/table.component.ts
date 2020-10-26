@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Jokes} from '../shared/prova.service';
+import {Jokes, ValueEntity} from '../shared/prova.service';
 import {ProvaService} from '../shared/prova.service';
 
 @Component({
@@ -10,7 +10,6 @@ import {ProvaService} from '../shared/prova.service';
     <p> Filtro Explicit: {{prendoDati.explicit}}</p>
   </h3>
 
-
   <h2>Tabella</h2>
   <table border="1px" align="center">
     <thead>
@@ -20,7 +19,7 @@ import {ProvaService} from '../shared/prova.service';
     </thead>
     <tbody>
 
-    <tr *ngFor="let joke of jokes.value">
+    <tr *ngFor="let joke of jokes">
       <td>{{ joke.id }}</td>
       <td>{{ joke.categories[0] }}</td>
     </tr>
@@ -32,17 +31,16 @@ import {ProvaService} from '../shared/prova.service';
 export class TableComponent implements OnInit{
   @Input() prendoDati: any;
   url = 'http://api.icndb.com/jokes';
-  // possibile json recuperato col service
   headers = ['id', 'categoria'];
 
- jokes: any;
+ jokes: ValueEntity[];
 
  constructor(private provaService: ProvaService) {
  }
 
   ngOnInit(){
     this.provaService.getJokes().subscribe(data => {
-      this.jokes = data;
+      this.jokes = data.value;
       console.log(data);
     });
   }

@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 export interface Jokes {
   type: string;
@@ -18,7 +20,9 @@ export class ProvaService{
     }
   url = 'http://api.icndb.com/jokes';
 
-  getJokes(){
-  return this.http.get(this.url);
+  getJokes(): Observable<Jokes>{
+  return this.http.get(this.url).pipe(map( res => {
+    return res as Jokes;
+  }));
   }
 }
