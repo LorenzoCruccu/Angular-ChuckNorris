@@ -32,7 +32,6 @@ import {HttpClient} from '@angular/common/http';
 export class TableComponent implements OnChanges{
   @Input() prendoDati: any;
   url = 'http://api.icndb.com/jokes';
-  // TODO fare metodo per prendere json
   // possibile json recuperato col service
   headers = ['joke', 'categoria'];
 
