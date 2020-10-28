@@ -42,7 +42,7 @@ export class ProvaService{
   }
 
   getSingleJoke(jokeID: number): Observable<Jokes>{
-    return this.http.get(this.url + jokeID).pipe(map( res => {
+    return this.http.get(this.url + '/' + jokeID).pipe(map( res => {
       return res as Jokes;
     }));
 

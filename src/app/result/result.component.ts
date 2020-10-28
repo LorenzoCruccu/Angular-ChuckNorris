@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 
   template:  `
     <div class="container">
-      <blockquote class="blockquote"> <h1 class="display-4"> Joke: {{jokes[0]?.joke}} </h1> </blockquote>
+      <blockquote class="blockquote"> <h1 class="display-4"> Joke: {{jokes?.joke}} </h1> </blockquote>
       <footer class="blockquote-footer"> <h4> Chuck Norris </h4></footer>
     </div>
 
