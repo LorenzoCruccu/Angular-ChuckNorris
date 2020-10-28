@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, DoCheck, OnChanges, SimpleChanges} from '@angular/core';
 import {Jokes, ValueEntity} from '../shared/prova.service';
 import {ProvaService} from '../shared/prova.service';
 
@@ -20,7 +20,7 @@ import {ProvaService} from '../shared/prova.service';
     <tbody>
 
     <tr *ngFor="let joke of jokes">
-      <td>{{ joke.id }}</td>
+      <td> <a [routerLink]="['result', joke.id]">{{ joke.id }} </a></td>
       <td>{{ joke.categories[0] }}</td>
     </tr>
     </tbody>
@@ -28,7 +28,7 @@ import {ProvaService} from '../shared/prova.service';
     </div>
   `
 })
-export class TableComponent implements OnInit{
+export class TableComponent implements OnChanges{
   @Input() prendoDati: any;
   url = 'http://api.icndb.com/jokes';
   headers = ['id', 'categoria'];
@@ -38,11 +38,12 @@ export class TableComponent implements OnInit{
  constructor(private provaService: ProvaService) {
  }
 
-  ngOnInit(){
-    this.provaService.getJokes().subscribe(data => {
-      this.jokes = data.value;
-      console.log(data);
-    });
+  ngOnChanges(changes: SimpleChanges) {
+     this.provaService.getJokes().subscribe(data => {
+       this.jokes = data.value;
+       console.log(data);
+     });
+
   }
 
 }

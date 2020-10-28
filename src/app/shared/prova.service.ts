@@ -25,4 +25,26 @@ export class ProvaService{
     return res as Jokes;
   }));
   }
+  getNerdyJokes(){
+    return this.http.get(this.url + '?limitTo=[nerdy]').pipe(map( res => {
+      return res as Jokes;
+    }));
+  }
+  getExplicitJokes(){
+    return this.http.get(this.url + '?limitTo=[explicit]').pipe(map( res => {
+      return res as Jokes;
+    }));
+  }
+  getNerdyExplicitJokes(){
+    return this.http.get(this.url + '?limitTo=[nerdy,explicit]').pipe(map( res => {
+      return res as Jokes;
+    }));
+  }
+
+  getSingleJoke(jokeID: number): Observable<Jokes>{
+    return this.http.get(this.url + jokeID).pipe(map( res => {
+      return res as Jokes;
+    }));
+
+  }
 }
