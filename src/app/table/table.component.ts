@@ -4,14 +4,14 @@ import {ProvaService} from '../shared/prova.service';
 
 @Component({
   selector: 'app-table',
-  template: ` <div align="center"><h1>Qui sono su app-table</h1>
+  template: ` <div class="text-center"><h1>Qui sono su app-table</h1>
   <h3>Dati:
     <p> Filtro Nerdy: {{prendoDati.nerdy}}</p>
     <p> Filtro Explicit: {{prendoDati.explicit}}</p>
   </h3>
 
   <h2>Tabella</h2>
-  <table border="1px" align="center">
+  <table border="1px" class="table table-hover table-striped" >
     <thead>
     <th *ngFor="let header of headers">
       {{header}}

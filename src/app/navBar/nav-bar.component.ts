@@ -3,19 +3,13 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'app-nav-bar',
   template: `
-    <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">WebSiteName</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Page 1</a></li>
-        <li><a href="#">Page 2</a></li>
-        <li><a href="#">Page 3</a></li>
+    <nav class="navbar navbar-expand-sm bg-dark">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['']" routerLinkActive="text-warning" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        </li>
       </ul>
-    </div>
-  </nav>
+    </nav>
 
   `
 })

@@ -5,8 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
 
   template:  `
-  <blockquote> Joke: {{jokes[0]?.joke}}</blockquote>
-  <footer class="blockquote-footer">Chuck Norris</footer>
+    <div class="container">
+      <blockquote class="blockquote"> <h1 class="display-4"> Joke: {{jokes[0]?.joke}} </h1> </blockquote>
+      <footer class="blockquote-footer"> <h4> Chuck Norris </h4></footer>
+    </div>
+
   `
 })
 export class ResultComponent implements OnInit{
