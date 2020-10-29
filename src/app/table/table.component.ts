@@ -10,6 +10,7 @@ import {ProvaService} from '../shared/prova.service';
     <p [ngClass]="{ 'text-success': nnnerdy}"> Filtro Nerdy: {{nnnerdy === true ? 'Attivato' : 'Disattivato'}}</p>
     <p [ngClass]="{ 'text-success': eeexplicit}"> Filtro Explicit: {{eeexplicit === true ? 'Attivato' : 'Disattivato'}}</p>
     </h4>
+    <div class="text-danger"> <a [routerLink]="[ 'result', random ]"> Random?</a></div>
 
   <h2>Tabella</h2>
   <table border="1px" class="table table-hover table-striped" >
@@ -35,8 +36,17 @@ export class TableComponent implements OnChanges{
   headers = ['ID', 'Categoria'];
 
  jokes: ValueEntity[];
- randomJ: ValueEntity[];
+ random: number;
  constructor(private provaService: ProvaService) {
+ }
+ doRandom(){
+   this.provaService.getRandomJoke().subscribe(data => {
+     this.random = data.value?.id;
+   });
+ }
+
+ ngOnInit(){
+   this.doRandom();
  }
   ngOnChanges(changes: SimpleChanges) {
    console.log( 'explicit: ' + this.eeexplicit);
