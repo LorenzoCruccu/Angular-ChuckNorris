@@ -1,14 +1,15 @@
-import {Component, Input, DoCheck, OnChanges, SimpleChanges} from '@angular/core';
-import {Jokes, ValueEntity} from '../shared/prova.service';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {ValueEntity} from '../shared/prova.service';
 import {ProvaService} from '../shared/prova.service';
 
 @Component({
   selector: 'app-table',
-  template: ` <div class="text-center"><h1>Qui sono su app-table</h1>
-  <h3>Dati:
-    <p> Filtro Nerdy: {{prendoDati.nerdy}}</p>
-    <p> Filtro Explicit: {{prendoDati.explicit}}</p>
-  </h3>
+  template: ` <div class="text-center bg-light"><h1>App-Table Component</h1>
+  <h3>Filtri:</h3>
+    <h4>
+    <p [ngClass]="{ 'text-success': nnnerdy}"> Filtro Nerdy: {{nnnerdy === true ? 'Attivato' : 'Disattivato'}}</p>
+    <p [ngClass]="{ 'text-success': eeexplicit}"> Filtro Explicit: {{eeexplicit === true ? 'Attivato' : 'Disattivato'}}</p>
+    </h4>
 
   <h2>Tabella</h2>
   <table border="1px" class="table table-hover table-striped" >
@@ -29,21 +30,42 @@ import {ProvaService} from '../shared/prova.service';
   `
 })
 export class TableComponent implements OnChanges{
-  @Input() prendoDati: any;
-  url = 'http://api.icndb.com/jokes';
-  headers = ['id', 'categoria'];
+  @Input() eeexplicit: boolean;
+  @Input() nnnerdy: boolean;
+  headers = ['ID', 'Categoria'];
 
  jokes: ValueEntity[];
-
+ randomJ: ValueEntity[];
  constructor(private provaService: ProvaService) {
  }
-
   ngOnChanges(changes: SimpleChanges) {
+   console.log( 'explicit: ' + this.eeexplicit);
+   console.log( 'nerdy:' + this.nnnerdy);
+   if (this.eeexplicit === true && this.nnnerdy === true){
+     this.provaService.getNerdyExplicitJokes().subscribe(data => {
+       this.jokes = data.value;
+       console.log(data);
+     });
+   }
+   else if (this.eeexplicit === true){
+     this.provaService.getExplicitJokes().subscribe(data => {
+       this.jokes = data.value;
+       console.log(data);
+     });
+   }
+   else if (this.nnnerdy === true){
+     this.provaService.getNerdyJokes().subscribe(data => {
+       this.jokes = data.value;
+       console.log(data);
+     });
+   }
+   else{
      this.provaService.getJokes().subscribe(data => {
        this.jokes = data.value;
        console.log(data);
      });
-
+   }
   }
+
 
 }

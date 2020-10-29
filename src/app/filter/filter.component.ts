@@ -1,35 +1,42 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-filter',
   template: `
     <div class="container">
-     <h1> Component Filter</h1>
+     <h1> Seleziona i filtri</h1>
       <br>
-      <input type="checkbox" id="nerdy" [(ngModel)]="dati.nerdy" >
-      <label for="nerdy"> Nerdy</label>
-
-      <input type="checkbox" id="explicit" [value]="dati.explicit"  (change)="aggiornaExplicit($event)" >
-      <label for="explicit"> Explicit</label>
+      <div class="form-check-inline">
+        <label class="form-check-label"> <input type="checkbox" id="nerdy" [(ngModel)]="nnnerdy"> Nerdy</label>
+      </div>
+      <div class="form-check-inline">
+        <label class="form-check-label"> <input type="checkbox" id="explicit" [value]="eeexplicit" (change)="aggiornaExplicit($event)">Explicit</label>
+      </div>
       <br>
-
-      <app-table [prendoDati]="dati"></app-table>
+      <app-table  [nnnerdy]="nnnerdy"  [eeexplicit]="eeexplicit"></app-table>
     </div>
 
   `
 })
-export class FilterComponent{
-  dati = {
-    nerdy: false,
-    explicit: false
-  };
-  aggiornaNerdy(n){
-    //console.log((bo.target as Element).id);
-    this.dati.nerdy = n.currentTarget.checked;
-    console.log(this.dati.nerdy);
+export class FilterComponent implements OnInit{
+
+  nnnerdy: boolean;
+  eeexplicit: boolean;
+
+  ngOnInit(){
+    this.nnnerdy = false;
+    this.eeexplicit = false;
+
   }
+
+
+ // aggiornaNerdy(n){
+    // console.log((bo.target as Element).id);
+   // this.dati.nerdy = n.currentTarget.checked;
+  //  console.log(this.dati.nerdy);
+ // }
   aggiornaExplicit(b){
-    this.dati.explicit = b.currentTarget.checked;
+    this.eeexplicit = b.currentTarget.checked;
   }
 
 

@@ -45,6 +45,11 @@ export class ProvaService{
     return this.http.get(this.url + '/' + jokeID).pipe(map( res => {
       return res as Jokes;
     }));
+  }
+  getRandomJoke(): Observable<Jokes>{
+    return this.http.get(this.url + '/' + 'random').pipe(map( res => {
+      return res as Jokes;
+    }));
 
   }
 }
